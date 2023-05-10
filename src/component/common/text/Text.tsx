@@ -21,10 +21,12 @@ export interface TextProps extends Omit<TextStyleProps, "size" | "color"> {
     TextStyleProps["color"]
   >}`;
   children?: ReactNode;
+  className?: string;
 }
 export default function Text({
   variant,
   children,
+  className,
   ...props
 }: TextProps) {
   const [size, color] = variant.split("/") as [
@@ -36,6 +38,7 @@ export default function Text({
       className={textStyle({
         color,
         size,
+        className
       })}
       {...props}
     >
