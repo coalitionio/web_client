@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.7.14",
+    "@originjs/vite-plugin-federation": "^1.2.2",
     "class-variance-authority": "^0.6.0",
     "cva": "^0.0.0",
     "react": "^18.2.0",
@@ -20,7 +21,8 @@
     "react-hook-form": "^7.43.9",
     "react-query": "^3.39.3",
     "react-router-dom": "^6.11.1",
-    "recoil": "^0.7.7"
+    "recoil": "^0.7.7",
+    "styled-components": "6.0.0-rc.1"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "7.0.9",
