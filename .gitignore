@@ -26,3 +26,6 @@ dist-ssr
 # Cypress 
 cypress/videos
 cypress/screenshots
+
+# Environment
+.env
