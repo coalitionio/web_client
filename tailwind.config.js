@@ -3,12 +3,6 @@ export default {
   mode: ["jit"],
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    screens: {
-      sm: "480px",
-      md: "768px",
-      lg: "976px",
-      xl: "1440px",
-    },
     // colors: {
     //   'blue': '#1fb6ff',
     //   'purple': '#7e5bef',
@@ -20,10 +14,10 @@ export default {
     //   'gray': '#8492a6',
     //   'gray-light': '#d3dce6',
     // },
-    fontFamily: {
-      sans: ["Graphik", "sans-serif"],
-      serif: ["Merriweather", "serif"],
-    },
+    // fontFamily: {
+    //   sans: ["Graphik", "sans-serif"],
+    //   serif: ["Merriweather", "serif"],
+    // },
     extend: {
       spacing: {
         128: "32rem",
