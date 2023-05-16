@@ -8,7 +8,6 @@ const LandingLayout = () => {
     <div>
       <header className="w-full h-20 bg-blue-600">Header</header>
       <main>
-        <button onClick={t()}>Go Pro</button>
         <Outlet></Outlet>
       </main>
     </div>

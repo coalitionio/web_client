@@ -1,6 +1,10 @@
 import React from "react";
 import { cva } from "class-variance-authority";
-const selectStyle = cva();
+const selectStyle = cva("", {
+  variants: {
+    color: "",
+  },
+});
 type Props = {};
 
 const Select = (props: Props) => {
