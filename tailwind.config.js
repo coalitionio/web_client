@@ -27,11 +27,16 @@ export default {
         144: "36rem",
       },
       borderRadius: {
-        sm: "2rem",
+        sm: "5px",
         md: "2rem",
         lg: "3rem",
         full: "50%",
       },
+      height :{
+        "header-sm": "10rem", 
+        "header-md": "12rem", 
+        "header-lg": "15rem", 
+      }
     },
   },
   plugins: [],

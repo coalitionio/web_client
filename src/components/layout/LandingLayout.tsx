@@ -1,30 +1,43 @@
 import { Select } from "@ui/common/select";
+import SelectItem from "@ui/common/select/SelectItem";
 import React from "react";
+import Draggable from "react-draggable";
 import { useTranslation } from "react-i18next";
 import { Outlet } from "react-router-dom";
-import styled from "styled-components"
-
+import styled from "styled-components";
 
 const LandingLayout = () => {
   const t = useTranslation();
   const test = ["1", "2", "3"];
   return (
-    <div>
+    <>
       <header className="w-full h-20 ">
-        <div className="w-10">
-
-        <Select className="" onChange={(value) => console.log(value)}>
-          {test.map((t) => {
-            return <span>Hello {t}</span>;
-          })}
-
-        </Select>
+        <div className="w-[10rem]">
+          <Draggable
+            axis="x"
+            handle=".handle"
+            defaultPosition={{ x: 0, y: 0 }}
+            grid={[25, 25]}
+            scale={1}>
+            <Select
+              label="Select"
+              className=""
+              onChange={(value) => console.log(value)}>
+              {test.map((t, i) => {
+                return (
+                  <SelectItem value={i} key={i}>
+                    {t}
+                  </SelectItem>
+                );
+              })}
+            </Select>
+          </Draggable>
         </div>
       </header>
-      <main>
+      <main className="w-full h-full bg-amber-400">
         <Outlet></Outlet>
       </main>
-    </div>
+    </>
   );
 };
 
