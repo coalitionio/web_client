@@ -1,9 +1,9 @@
 import { Select } from "@ui/common/select";
+import SelectItem from "@ui/common/select/SelectItem";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Outlet } from "react-router-dom";
-import styled from "styled-components"
-
+import styled from "styled-components";
 
 const LandingLayout = () => {
   const t = useTranslation();
@@ -11,14 +11,20 @@ const LandingLayout = () => {
   return (
     <div>
       <header className="w-full h-20 ">
-        <div className="w-10">
-
-        <Select className="" onChange={(value) => console.log(value)}>
-          {test.map((t) => {
-            return <span>Hello {t}</span>;
-          })}
-
-        </Select>
+        <div className="w-[10rem]">
+          <Select
+            label="Select"
+            multiple={false}
+            className=""
+            onChange={(value) => console.log(value)}>
+            {test.map((t, i) => {
+              return (
+                <SelectItem value={i} key={i}>
+                  {t}
+                </SelectItem>
+              );
+            })}
+          </Select>
         </div>
       </header>
       <main>
