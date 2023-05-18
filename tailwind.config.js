@@ -19,6 +19,9 @@ export default {
     //   serif: ["Merriweather", "serif"],
     // },
     extend: {
+      zIndex: {
+        inputDropdown: 5
+      },
       spacing: {
         128: "32rem",
         144: "36rem",

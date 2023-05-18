@@ -6,8 +6,7 @@ import Text, { TextProps } from "./Text";
 const meta = {
   title: "Text",
   component: Text,
-  tags: ["autodocs"],
-  argTypes: {},
+  tags: ['autodocs'],
 } satisfies Meta<typeof Text>;
 
 export default meta;
@@ -16,7 +15,8 @@ type Story = StoryObj<typeof meta>;
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 export const Primary: Story = {
   args: {
-    variant: "large/primary",
-    children: "Text",
+    variant : 'large/default',
+    children: 'Text',
+    className:""
   },
 };

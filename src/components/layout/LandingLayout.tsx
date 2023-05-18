@@ -1,9 +1,15 @@
+<<<<<<< Updated upstream
 import { Select } from "@ui/common/select";
+=======
+import { Image } from "@ui/common/image";
+>>>>>>> Stashed changes
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Outlet } from "react-router-dom";
+import styled from "styled-components"
+
+
 const LandingLayout = () => {
-  console.log(import.meta.env.SENTRY_DSN);
   const t = useTranslation();
   const test = ["1", "2", "3"];
   return (
