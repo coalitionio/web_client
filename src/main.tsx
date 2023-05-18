@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./utils/lang/i18n.ts";
-import "./utils/errorTracking/sentry";
+// import "./utils/errorTracking/sentry";
 import "./index.css";
 import {
   ReactQueryDevtools,
