@@ -2,7 +2,7 @@ import { VariantProps, cva } from "class-variance-authority";
 import { AnimatePresence, motion } from "framer-motion";
 import React, {
   HTMLAttributes,
-  LegacyRef,
+  
   ReactNode,
   RefObject,
   useEffect,
@@ -119,7 +119,6 @@ const Select = <T,>({
                   onClick: (value: any) =>
                     handleChange(value, child.props.children),
                   value: child.props.value,
-                  // selected:true
                 });
               }
               return child;
