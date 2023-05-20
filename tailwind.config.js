@@ -20,7 +20,7 @@ export default {
     // },
     extend: {
       zIndex: {
-        inputDropdown: 5
+        inputDropdown: 5,
       },
       spacing: {
         128: "32rem",
@@ -32,11 +32,11 @@ export default {
         lg: "3rem",
         full: "50%",
       },
-      height :{
-        "header-sm": "10rem", 
-        "header-md": "12rem", 
-        "header-lg": "15rem", 
-      }
+      height: {
+        "header-sm": "6rem",
+        "header-md": "7rem",
+        "header-lg": "8rem",
+      },
     },
   },
   plugins: [],

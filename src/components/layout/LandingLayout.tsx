@@ -1,3 +1,4 @@
+import DropdownHeader from "@ui/common/header/DropdownHeader";
 import { Select } from "@ui/common/select";
 import SelectItem from "@ui/common/select/SelectItem";
 import React from "react";
@@ -11,7 +12,8 @@ const LandingLayout = () => {
   const test = ["1", "2", "3"];
   return (
     <>
-      <header className="w-full h-20 ">
+      <DropdownHeader></DropdownHeader>
+      {/* <header className="w-full h-20 ">
         <div className="w-[10rem]">
           <Draggable
             axis="x"
@@ -33,7 +35,7 @@ const LandingLayout = () => {
             </Select>
           </Draggable>
         </div>
-      </header>
+      </header> */}
       <main className="w-full h-full bg-amber-400">
         <Outlet></Outlet>
       </main>
