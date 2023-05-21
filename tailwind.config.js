@@ -28,14 +28,17 @@ export default {
       },
       borderRadius: {
         sm: "5px",
-        md: "2rem",
-        lg: "3rem",
+        md: "7px",
+        lg: "12px",
         full: "50%",
       },
       height: {
         "header-sm": "6rem",
         "header-md": "7rem",
         "header-lg": "8rem",
+      },
+      backgroundColor: {
+        hightlight: "#9DBEBB",
       },
     },
   },

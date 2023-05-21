@@ -2,7 +2,6 @@ import { VariantProps, cva } from "class-variance-authority";
 import { AnimatePresence, motion } from "framer-motion";
 import React, {
   HTMLAttributes,
-  
   ReactNode,
   RefObject,
   useEffect,
@@ -60,25 +59,30 @@ const Select = <T,>({
    * T , T[]
    */
   const [valueDisplay, setValueDisplay] = useState<JSX.Element | JSX.Element[]>(
-    ()=>{
-      if(multiple) return [] as any
+    () => {
+      if (multiple) return [] as any;
     }
   );
   const ref = useRef();
   useDetectOutside({
-    ref,onOutsideClick : ()=>{
-      setDropdown(false)
-    }
-  })
+    ref,
+    onOutsideClick: () => {
+      setDropdown(false);
+    },
+  });
   const handleChange = (value: string, display: JSX.Element) => {
     if (multiple && Array.isArray(valueDisplay)) {
-      console.log(valueDisplay.includes(display) );
+      console.log(valueDisplay.includes(display));
 
-      setValueDisplay(!valueDisplay.includes(display) ? [...valueDisplay, display] : valueDisplay.filter((v)=>v.key === display.key ));
+      setValueDisplay(
+        !valueDisplay.includes(display)
+          ? [...valueDisplay, display]
+          : valueDisplay.filter((v) => v.key === display.key)
+      );
     } else {
       setValueDisplay(display);
     }
-    setDropdown(false)
+    setDropdown(false);
     onChange(value);
   };
   const renderValue = useMemo(() => {
@@ -89,11 +93,13 @@ const Select = <T,>({
     }
   }, [valueDisplay]);
   return (
-    <div ref={ref as any} className={`cursor-pointer relative px-4 p-2 border-slate-800 border w-full focus-within:border-blue-500 rounded-sm ${className}`} {...props}>
+    <div
+      ref={ref as any}
+      className={`cursor-pointer relative px-4 p-2 border-slate-800 border w-fit focus-within:border-blue-500 rounded-sm ${className}`}
+      {...props}>
       <label
         htmlFor="hidden"
-        className="cursor-pointer absolute z-[2] w-full h-full block top-0 left-0">
-      </label>
+        className="cursor-pointer absolute z-[2] w-full h-full block top-0 left-0"></label>
       <input
         aria-hidden="true"
         id="hidden"
@@ -103,16 +109,16 @@ const Select = <T,>({
         onChange={() => {
           setDropdown(!dropdown);
         }}
-        />
-        {renderValue || label}
+      />
+      {renderValue || label}
       <AnimatePresence>
         {dropdown && (
           <motion.ul
-            initial={{ opacity: 0, y: "50%" }}
-            animate={{ opacity: 1, y: "100%" }}
-            exit={{ opacity: 0, y: "50%" }}
+            initial={{ opacity: 0, y: "20%" }}
+            animate={{ opacity: 1, y: "103%" }}
+            exit={{ opacity: 0, y: "20%" }}
             transition={{ duration: 0.2 }}
-            className="py-2 px-0 absolute shadow-md bottom-0 left-0 w-full list-style-none">
+            className="py-2 px-0 absolute shadow-md bottom-0 left-0 w-fit bg-white rounded-sm list-style-none">
             {React.Children.map(children, (child) => {
               if (React.isValidElement(child)) {
                 return React.cloneElement<any>(child, {
@@ -128,7 +134,7 @@ const Select = <T,>({
       </AnimatePresence>
       {/* {children?.map((child) => child)} */}
       <fieldset className="w-full h-full absolute top-0 left-0">
-        <legend className="ml-2 px-2 relative -top-1/2">App</legend>
+        <legend className="ml-2 px-2 relative -top-1/2"></legend>
       </fieldset>
     </div>
   );

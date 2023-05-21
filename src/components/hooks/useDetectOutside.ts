@@ -1,28 +1,26 @@
-import React, { Ref, useEffect, useRef } from 'react'
+import React, { Ref, useEffect, useRef } from "react";
 
 type Props = {
-    ref: any,
-    onOutsideClick :()=>void;
-}
+  ref: any;
+  onOutsideClick: () => void;
+};
 
-const useDetectOutside = ({onOutsideClick,ref }: Props) => {
+const useDetectOutside = ({ onOutsideClick, ref }: Props) => {
+  const handleClick = (event: MouseEvent) => {
+    if (ref.current && !ref.current.contains(event.target)) {
+      onOutsideClick();
+    }
+  };
 
-    const handleClick = (event:MouseEvent) => {
-      if (ref.current && !ref.current.contains(event.target)) {
-        onOutsideClick();
-      }
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClick);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClick);
     };
-  
-    useEffect(() => {
-      document.addEventListener('mousedown', handleClick);
-  
-      return () => {
-        document.removeEventListener('mousedown', handleClick);
-      };
-    }, []);
-  
-    return ref;
-  
-}
+  }, [ref]);
 
-export default useDetectOutside
+  return ref;
+};
+
+export default useDetectOutside;

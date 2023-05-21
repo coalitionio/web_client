@@ -1,3 +1,4 @@
+import { ErrorBoundary } from "@sentry/react";
 import DropdownHeader from "@ui/common/header/DropdownHeader";
 import { Select } from "@ui/common/select";
 import SelectItem from "@ui/common/select/SelectItem";
@@ -12,11 +13,12 @@ const LandingLayout = () => {
   const test = ["1", "2", "3"];
   return (
     <>
-      <DropdownHeader></DropdownHeader>
-      {/* <header className="w-full h-20 ">
+      <ErrorBoundary>
+        <DropdownHeader></DropdownHeader>
+        {/* <header className="w-full h-20 ">
         <div className="w-[10rem]">
           <Draggable
-            axis="x"
+          axis="x"
             handle=".handle"
             defaultPosition={{ x: 0, y: 0 }}
             grid={[25, 25]}
@@ -28,17 +30,18 @@ const LandingLayout = () => {
               {test.map((t, i) => {
                 return (
                   <SelectItem value={i} key={i}>
-                    {t}
+                  {t}
                   </SelectItem>
-                );
-              })}
+                  );
+                })}
             </Select>
-          </Draggable>
-        </div>
-      </header> */}
-      <main className="w-full h-full bg-amber-400">
-        <Outlet></Outlet>
-      </main>
+            </Draggable>
+            </div>
+          </header> */}
+        <main className="w-full h-full bg-amber-400">
+          <Outlet></Outlet>
+        </main>
+      </ErrorBoundary>
     </>
   );
 };

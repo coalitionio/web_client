@@ -1,12 +1,40 @@
-import React, { ReactNode } from "react";
+import React, { AllHTMLAttributes, HTMLAttributes, ReactNode } from "react";
+import { cva, VariantProps } from "class-variance-authority";
 
-type Props = {
+const BoxStyle = cva("relative", {
+  variants: {
+    flex: {
+      true: "flex gap-5",
+      false: "",
+    },
+  },
+});
+interface BoxProps
+  extends AllHTMLAttributes<HTMLElement>,
+    VariantProps<typeof BoxStyle> {
   component?: "div" | "ul" | "li" | "span" | "p";
   children?: ReactNode;
-};
-
-const Box = ({ component: Component = "div", children }: Props) => {
-  return <Component>{children}</Component>;
+  ref?: any;
+}
+const Box = ({
+  component: Component = "div",
+  children,
+  className,
+  ref,
+  flex,
+  ...props
+}: BoxProps) => {
+  return (
+    <Component
+      ref={ref}
+      className={BoxStyle({
+        flex: flex,
+        className,
+      })}
+      {...props}>
+      {children}
+    </Component>
+  );
 };
 
 export default Box;
