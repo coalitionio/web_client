@@ -39,7 +39,7 @@ const LandingLayout = () => {
             </div>
           </header> */}
         <main className="w-full h-full bg-amber-400">
-          test notice
+           notice
           <Outlet></Outlet>
         </main>
       </ErrorBoundary>
