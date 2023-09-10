@@ -14,7 +14,6 @@ const LandingLayout = () => {
   return (
     <>
       <ErrorBoundary>
-        <DropdownHeader></DropdownHeader>
         {/* <header className="w-full h-20 ">
         <div className="w-[10rem]">
           <Draggable

@@ -1,7 +1,7 @@
 [![Quality gate](http://sonar.wyvernpserver.tech/api/project_badges/quality_gate?project=coalitionio_web_client_AYp9gfTS7n3XVSslciDK&token=sqb_e8ab22c9b8221b3a11f595ab3e2d87f157bdbcf4)](http://sonar.wyvernpserver.tech/api/project_badges/quality_gate?project=coalitionio_web_client_AYp9gfTS7n3XVSslciDK&token=sqb_e8ab22c9b8221b3a11f595ab3e2d87f157bdbcf4)
 # Welcome
 
-Welcome to the base project of <repo>. It provides a solid foundation with essential tools and configurations to kickstart your React development.
+Welcome to the base React/Typscript project of  [MarineFox/xWyvernPx](https://github.com/xWyvernPx). It provides a solid foundation with essential tools and configurations to kickstart your React development.
 
 ## Features
 
@@ -34,22 +34,20 @@ To get started with this boilerplate, follow these steps:
 git clone <repository-url>
 ```
 
-2. Navigate to the project folder.
-
-```bash
-cd client
-```
-
-3. Install project dependencies.
+2. Install project dependencies.
 
 ```bash
 npm install
+#or
+pnpm install
 ```
 
-4. Start the development server.
+3. Start the development server.
 
 ```bash
 npm run dev
+#or 
+pnpm install
 ```
 
 Your React app should now be running locally on [http://localhost:3000](http://localhost:3000).
