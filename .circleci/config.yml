@@ -1,13 +1,13 @@
 version: 2.1
 
 jobs:
-  build:
+  scan:
     docker:
       - image: circleci/node:14
 
     steps:
       - checkout
-      
+
       # Create a directory for SonarScanner and install it
       - run:
           name: Install SonarScanner
@@ -25,9 +25,57 @@ jobs:
             sonar-scanner \
               -Dsonar.login=$SONAR_TOKEN \
               -Dsonar.host.url=$SONAR_HOST_URL
+    preview_deployment:
+      docker:
+        - image: circleci/node:latest
+      environment:
+        VERCEL_ORG_ID: $VERCEL_ORG_ID
+        VERCEL_PROJECT_ID: $VERCEL_PROJECT_ID
+      steps:
+        - checkout
+        - run:
+            name: Install Vercel CLI
+            command: npm install --global vercel@latest
+        - run:
+            name: Pull Vercel Environment Information
+            command: vercel pull --yes --environment=preview --token=$VERCEL_TOKEN
+        - run:
+            name: Build Project Artifacts
+            command: vercel build --token=$VERCEL_TOKEN
+        - run:
+            name: Deploy Project Artifacts to Vercel
+            command: vercel deploy --prebuilt --token=$VERCEL_TOKEN
 
+  production_deployment:
+    docker:
+      - image: circleci/node:latest
+    environment:
+      VERCEL_ORG_ID: $VERCEL_ORG_ID
+      VERCEL_PROJECT_ID: $VERCEL_PROJECT_ID
+    steps:
+      - checkout
+      - run:
+          name: Install Vercel CLI
+          command: npm install --global vercel@latest
+      - run:
+          name: Pull Vercel Environment Information
+          command: vercel pull --yes --environment=production --token=$VERCEL_TOKEN
+      - run:
+          name: Build Project Artifacts
+          command: vercel build --prod --token=$VERCEL_TOKEN
+      - run:
+          name: Deploy Project Artifacts to Vercel
+          command: vercel deploy --prebuilt --prod --token=$VERCEL_TOKEN
 workflows:
   version: 2
-  build-and-scan:
+  build-and-scan-deploy:
     jobs:
-      - build
+      - scan
+      - preview_deployment:
+          filters:
+            branches:
+              ignore: /main/
+      - production_deployment:
+          filters:
+            branches:
+              only: /main/
