@@ -1,5 +1,5 @@
 import { RouteObject, createBrowserRouter } from "react-router-dom";
-import LandingLayout from "../components/layout/LandingLayout";
+import LandingLayout from "../base/components/layout/LandingLayout";
 import appRoutes from "@/base/app/route";
 
 const routes: RouteObject[] = [

@@ -1,5 +1,5 @@
 import React from "react";
-import { DropdownList, DropdownListOptions } from "@ui/common/layout";
+import { DropdownList, DropdownListOptions } from "@/base/components/common/layout";
 
 describe("<Box /> testing", () => {
   it("renders", () => {

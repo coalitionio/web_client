@@ -20,7 +20,7 @@
     "noFallthroughCasesInSwitch": true,
     "baseUrl": ".",
     "paths": {
-      "@ui/*": ["./src/components/*"],
+      "@ui/*": ["src/base/components/*"],
       "@/*": ["./src/*"]
     }
   },

@@ -1,5 +1,5 @@
 import React from "react";
-import { Box } from "@ui/common/layout";
+import { Box } from "@/base/components/common/layout";
 
 describe("<Box /> testing", () => {
   it("renders", () => {
