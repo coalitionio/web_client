@@ -1,3 +1,4 @@
+[![Quality gate](http://sonar.wyvernpserver.tech/api/project_badges/quality_gate?project=coalitionio_web_client_AYp9gfTS7n3XVSslciDK&token=sqb_e8ab22c9b8221b3a11f595ab3e2d87f157bdbcf4)](http://sonar.wyvernpserver.tech/api/project_badges/quality_gate?project=coalitionio_web_client_AYp9gfTS7n3XVSslciDK&token=sqb_e8ab22c9b8221b3a11f595ab3e2d87f157bdbcf4)
 # Welcome
 
 Welcome to the base project of <repo>. It provides a solid foundation with essential tools and configurations to kickstart your React development.
