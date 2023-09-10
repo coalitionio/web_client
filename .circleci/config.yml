@@ -36,9 +36,9 @@ jobs:
         - run:
             name: Install Vercel CLI
             command: npm install --global vercel@latest
-        - run:
-            name: Pull Vercel Environment Information
-            command: vercel pull --yes --environment=preview --token=$VERCEL_TOKEN
+        # - run:
+        #     name: Pull Vercel Environment Information
+        #     command: vercel pull --yes --environment=preview --token=$VERCEL_TOKEN
         - run:
             name: Build Project Artifacts
             command: vercel build --token=$VERCEL_TOKEN
@@ -57,9 +57,9 @@ jobs:
       - run:
           name: Install Vercel CLI
           command: npm install --global vercel@latest
-      - run:
-          name: Pull Vercel Environment Information
-          command: vercel pull --yes --environment=production --token=$VERCEL_TOKEN
+      # - run:
+      #     name: Pull Vercel Environment Information
+      #     command: vercel pull --yes --environment=production --token=$VERCEL_TOKEN
       - run:
           name: Build Project Artifacts
           command: vercel build --prod --token=$VERCEL_TOKEN
@@ -68,7 +68,7 @@ jobs:
           command: vercel deploy --prebuilt --prod --token=$VERCEL_TOKEN
 workflows:
   version: 2
-  build-and-scan-deploy:
+  build-and-scan:
     jobs:
       - scan
       - preview_deployment:
