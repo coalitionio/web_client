@@ -8,9 +8,6 @@ jobs:
     steps:
       - checkout
 
-      # Disable shallow clone for better analysis relevancy
-      - run: git fetch --unshallow
-
       # Install and configure SonarScanner
       - run:
           name: Install SonarScanner
