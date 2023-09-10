@@ -1,6 +1,197 @@
+# This code is licensed from CircleCI to the user under the MIT license.
+# See here for details: https://circleci.com/developer/orbs/licensing
 version: 2.1
 
-workflows:
-    jobs: 
-      
-          
+executors:
+  scanner:
+    docker:
+      - image: alpine:latest
+
+commands:
+  setup-environment:
+    description: "Setup requirements"
+    steps:
+      - run:
+          name: "Setup environment"
+          command: |
+            apk update
+            apk add --no-cache zip openjdk11-jre-headless
+
+  install-engine:
+    description: "Install Sonarqube scanner"
+    parameters:
+      engine_version:
+        type: string
+        default: "4.2.0.1873"
+    steps:
+      - run:
+          name: "Install Sonarqube scanner"
+          command: |
+            wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-<< parameters.engine_version >>.zip
+            unzip sonar-scanner-cli-<< parameters.engine_version >>.zip
+
+  code-analysis:
+    description: "Run Sonarqube scanner for code analysis"
+    parameters:
+      organization:
+        type: string
+      host_url:
+        type: string
+      login:
+        type: string
+      projectKey:
+        type: string
+      projectBaseDir:
+        type: string
+        default: "/root/circleci-build"
+      sources:
+        type: string
+        default: "."
+      github_oauth:
+        type: string
+      github_repository:
+        type: string
+      runner_opts:
+        type: string
+        default: "-Xms1024m -Xmx4096m"
+      exclusions:
+        type: string
+        default: "**/*.yaml,**/*.yml"
+      engine_version:
+        type: string
+        default: "4.2.0.1873"
+    steps:
+      - run:
+          name: "Code analysis"
+          command: |
+            export SONAR_RUNNER_OPTS="<< parameters.runner_opts >>"
+            eval ./sonar-scanner-<< parameters.engine_version >>/bin/sonar-scanner \
+              -Dsonar.organization=${<< parameters.organization >>} \
+              -Dsonar.host.url=${<< parameters.host_url >>} \
+              -Dsonar.login=${<< parameters.login >>} \
+              -Dsonar.projectKey=${<< parameters.projectKey >>} \
+              -Dsonar.projectBaseDir=<< parameters.projectBaseDir >> \
+              -Dsonar.sources=<< parameters.sources >> \
+              -Dsonar.github.oauth=${<< parameters.github_oauth >>} \
+              -Dsonar.github.repository=${<< parameters.github_repository >>} \
+              -Dsonar.exclusions="<< parameters.exclusions >>"
+
+  commit-analysis:
+    description: "Run Sonarqube scanner for commit analysis"
+    parameters:
+      organization:
+        type: string
+      host_url:
+        type: string
+      login:
+        type: string
+      projectKey:
+        type: string
+      projectVersion:
+        type: string
+      projectBaseDir:
+        type: string
+        default: "/root/circleci-build"
+      sources:
+        type: string
+        default: "."
+      github_oauth:
+        type: string
+      github_pullRequest:
+        type: string
+      github_repository:
+        type: string
+      github_disableInlineComments:
+        type: boolean
+        default: false
+      analysis_mode:
+        type: string
+        default: "preview"
+      issuesReport_console_enable:
+        type: boolean
+        default: true
+      runner_opts:
+        type: string
+        default: "-Xms1024m -Xmx4096m"
+      exclusions:
+        type: string
+        default: "**/*.yaml,**/*.yml"
+      engine_version:
+        type: string
+        default: "4.2.0.1873"
+    steps:
+      - run:
+          name: "Commit analysis"
+          command: |
+            echo "${<< parameters.github_pullRequest >>}"
+            if [ ! -z "${<< parameters.github_pullRequest >>}" ]; then
+              export SONAR_RUNNER_OPTS="<< parameters.runner_opts >>"
+              eval ./sonar-scanner-<< parameters.engine_version >>/bin/sonar-scanner \
+                -Dsonar.organization=${<< parameters.organization >>} \
+                -Dsonar.host.url=${<< parameters.host_url >>} \
+                -Dsonar.login=${<< parameters.login >>} \
+                -Dsonar.projectKey=${<< parameters.projectKey >>} \
+                -Dsonar.projectVersion=2.${<< parameters.projectVersion >>} \
+                -Dsonar.issuesReport.console.enable=<< parameters.issuesReport_console_enable >> \
+                -Dsonar.projectBaseDir=<< parameters.projectBaseDir >> \
+                -Dsonar.sources=<< parameters.sources >> \
+                -Dsonar.analysis.mode=<< parameters.analysis_mode >> \
+                -Dsonar.github.pullRequest=${<< parameters.github_pullRequest >>} \
+                -Dsonar.github.disableInlineComments=<< parameters.github_disableInlineComments >> \
+                -Dsonar.github.oauth=${<< parameters.github_oauth >>} \
+                -Dsonar.github.repository=${<< parameters.github_repository >>} \
+                -Dsonar.exclusions="=<< parameters.exclusions >>"
+            else
+              echo "Check skipped..."
+            fi
+
+jobs:
+  analyze:
+    parameters:
+      organization:
+        type: env_var_name
+        default: SONARQUBE_SERVER_ORGANIZATION
+      host_url:
+        type: env_var_name
+        default: SONARQUBE_SERVER_URL
+      login:
+        type: env_var_name
+        default: SONARQUBE_SERVER_LOGIN
+      projectKey:
+        type: env_var_name
+        default: CIRCLE_PROJECT_REPONAME
+      projectVersion:
+        type: env_var_name
+        default: CIRCLE_BUILD_NUM
+      github_oauth:
+        type: env_var_name
+        default: SONARQUBE_GITHUB_OAUTH
+      github_repository:
+        type: env_var_name
+        default: SONARQUBE_SERVER_ORGANIZATION
+      github_pullRequest:
+        type: env_var_name
+        default: CIRCLECI_PULL_REQUEST_NUMBER
+    executor: scanner
+    steps:
+      - checkout
+      - setup-environment
+      - install-engine
+      - commit-analysis:
+          login: << parameters.login >>
+          host_url: <<parameters.host_url >>
+          organization: << parameters.organization >>
+          projectKey: << parameters.projectKey >>
+          projectVersion: << parameters.projectVersion >>
+          github_oauth: << parameters.github_oauth >>
+          github_repository: << parameters.github_repository >>
+          github_pullRequest: << parameters.github_pullRequest >>
+          projectBaseDir: ./
+      - code-analysis:
+          login: << parameters.login >>
+          host_url: <<parameters.host_url >>
+          organization: << parameters.organization >>
+          projectKey: << parameters.projectKey >>
+          github_oauth: << parameters.github_oauth >>
+          github_repository: << parameters.github_repository >>
+          projectBaseDir: ./
