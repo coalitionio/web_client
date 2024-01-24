@@ -3,7 +3,7 @@
 
 import i18n from "./utils/lang/i18n";
 
-export const drawerWidth = 260;
+export const drawerWidth = 250;
 
 export const twitterColor = "#1DA1F2";
 export const facebookColor = "#3b5998";
@@ -38,7 +38,8 @@ export const AUTH0_API = {
 
 const config = {
   defaultPath: "/sample-page",
-  fontFamily: `'Public Sans', sans-serif`,
+  // fontFamily: `'Public Sans', sans-serif`,
+  fontFamily: `'Inter', sans-serif`,
   i18n: i18n.language,
   miniDrawer: false,
   container: false,

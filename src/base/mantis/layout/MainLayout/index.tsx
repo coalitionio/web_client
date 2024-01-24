@@ -7,9 +7,9 @@ import { Box, Container, Toolbar, useMediaQuery } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
 // project import
-import Breadcrumbs from '@/base/components/@extended/Breadcrumbs';
+import Breadcrumbs from "@/base/components/@extended/Breadcrumbs";
 import useConfig from "@/base/hooks/useConfig";
-import navigation from "@/base/menu-items";
+import navigation from "@/base/mantis/menu-items";
 import { menuWithDrawerOpen } from "@/base/store/selectors/app";
 import { useRecoilState } from "recoil";
 import Drawer from "./Drawer";
@@ -23,7 +23,7 @@ const MainLayout = () => {
   const matchDownLG = useMediaQuery(theme.breakpoints.down("xl"));
 
   const { container, miniDrawer } = useConfig();
-  const [drawerOpen,setDrawerOpen] = useRecoilState(menuWithDrawerOpen);
+  const [drawerOpen, setDrawerOpen] = useRecoilState(menuWithDrawerOpen);
 
   // drawer toggler
   // const [open, setOpen] = useState(!miniDrawer || drawerOpen);
@@ -73,8 +73,7 @@ const MainLayout = () => {
               divider={false}
             />
             <AxiosInterceptor>
-
-            <Outlet />
+              <Outlet />
             </AxiosInterceptor>
             <Footer />
           </Container>
@@ -94,10 +93,9 @@ const MainLayout = () => {
               card={false}
               divider={false}
             />
-          <AxiosInterceptor>
-
-<Outlet />
-</AxiosInterceptor>
+            <AxiosInterceptor>
+              <Outlet />
+            </AxiosInterceptor>
             <Footer />
           </Box>
         )}

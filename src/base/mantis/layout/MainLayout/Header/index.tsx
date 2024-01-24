@@ -47,7 +47,7 @@ const Header = ({ open, handleDrawerToggle }: Props) => {
         }}>
         {!open ? <MenuUnfoldOutlined rev={{}} /> : <MenuFoldOutlined rev={{}} />}
       </IconButton>
-      {headerContent}
+      {/* {headerContent} */}
     </Toolbar>
   );
 

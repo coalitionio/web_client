@@ -1,7 +1,13 @@
 /** @type {import('tailwindcss').Config} */
+import medusaPreset from "@medusajs/ui-preset"
 export default {
   mode: ["jit"],
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+	
+  content: [
+		"./index.html", 
+	"./src/**/*.{js,ts,jsx,tsx}",
+	"./node_modules/@medusajs/ui/dist/**/*.{js,jsx,ts,tsx}",
+],
   theme: {
     // colors: {
     //   'blue': '#1fb6ff',
@@ -43,4 +49,5 @@ export default {
     },
   },
   plugins: [],
+	presets: [medusaPreset],
 };

@@ -4,17 +4,33 @@ import eng from "./en/en.json";
 // the translations
 // (tip move them in a JSON file and import them,
 // or even better, manage them separated from your code: https://react.i18next.com/guides/multiple-translation-files)
+import en from "./locale/en.json"
+import fr from "./locale/fr.json"
+import vi from "./locale/vi.json"
+import ja from "./locale/ja.json"
+import ko from "./locale/ko.json"
+
+// the translations
+// (tip move them in a JSON file and import them,
+// or even better, manage them separated from your code: https://react.i18next.com/guides/multiple-translation-files)
 const resources = {
   en: {
-    translation: eng,
+    translation: en,
   },
   fr: {
-    translation: {
-      "Welcome to React": "Bienvenue à React et react-i18next",
-    },
+    translation: fr
   },
+	vi:{
+		translation: vi
+	},
+	ja :{
+		translation: ja
+	},
+	
+	ko :{
+		translation: ko
+	},
 };
-
 i18n
   .use(initReactI18next) // passes i18n down to react-i18next
   .init({

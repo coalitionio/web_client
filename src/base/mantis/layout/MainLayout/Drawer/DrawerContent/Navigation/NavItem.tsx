@@ -13,6 +13,7 @@ import { useTheme } from '@mui/material/styles';
 import { menuWithDrawerOpen, menuWithOpenItem } from '@/base/store/selectors/app';
 import { LinkTarget, NavItemType } from '@/types/menu';
 import { useRecoilState, useRecoilValue } from 'recoil';
+import { useTranslation } from 'react-i18next';
 
 // ==============================|| NAVIGATION - LIST ITEM ||============================== //
 
@@ -23,6 +24,7 @@ interface Props {
 
 const NavItem = ({ item, level }: Props) => {
   const theme = useTheme();
+	const {t} = useTranslation()
   const drawerOpen = useRecoilValue(menuWithDrawerOpen);
   const [openItem, setOpenItem] = useRecoilState(menuWithOpenItem);
   
@@ -133,7 +135,7 @@ const NavItem = ({ item, level }: Props) => {
         <ListItemText
           primary={
             <Typography variant="h6" sx={{ color: isSelected ? iconSelectedColor : textColor }}>
-              {item.title}
+              {t(item.title as string)}
             </Typography>
           }
         />
